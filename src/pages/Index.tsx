@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Camera, Code, Pen, Film, ChevronDown, Play, Instagram, Linkedin, Twitter } from 'lucide-react';
 
@@ -20,15 +19,17 @@ function Index() {
           <div className="absolute inset-0 bg-gradient-to-b from-black via-black/95 to-black" />
         </div>
         <div className="relative z-10 text-center px-4 space-y-8">
-          <img 
-            src="https://txawaxvwy4ijlqqh.public.blob.vercel-storage.com/Untitled-1-removebg-preview-46nPaSNW7KuDai5vSEmq05bsyBkIyi.png"
-            alt="Astraeus Media Logo"
-            className="w-32 h-32 mx-auto mb-8 animate-fade-in"
-          />
-          <h1 className="text-7xl md:text-9xl font-bold mb-4 tracking-tight font-century-gothic neon-glow">
+          <div className="w-full flex justify-center">
+            <img 
+              src="https://txawaxvwy4ijlqqh.public.blob.vercel-storage.com/Untitled-1-removebg-preview-46nPaSNW7KuDai5vSEmq05bsyBkIyi.png"
+              alt="Astraeus Media Logo"
+              className="w-24 h-24 md:w-32 md:h-32 object-contain mb-8 animate-fade-in"
+            />
+          </div>
+          <h1 className="text-5xl sm:text-7xl md:text-9xl font-bold mb-4 tracking-tight font-century-gothic neon-glow">
             ASTRAEUS | MEDIA
           </h1>
-          <p className="text-2xl md:text-3xl font-light max-w-3xl mx-auto opacity-80 tracking-wide">
+          <p className="text-xl sm:text-2xl md:text-3xl font-light max-w-3xl mx-auto opacity-80 tracking-wide">
             Crafting digital excellence through film, design, and innovation
           </p>
           <ChevronDown className="w-8 h-8 mx-auto mt-16 animate-bounce opacity-50" />
@@ -149,8 +150,16 @@ function Index() {
           {/* Creative Design Work */}
           <div id="design-work" className="mb-32">
             <h3 className="text-3xl font-bold mb-12 tracking-tight font-century-gothic">Creative Design</h3>
-            <div className="glass-card rounded-2xl p-8 text-center">
-              <p className="text-gray-400">Coming Soon</p>
+            <div className="group relative aspect-video rounded-2xl overflow-hidden">
+              <img 
+                src="https://i.imghippo.com/files/YuH1118Ic.jpg"
+                alt="Creative Design Showcase"
+                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+              />
+              <div className="absolute inset-0 glass-effect opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col items-center justify-end p-8">
+                <h3 className="text-2xl font-bold mb-2">Visual Storytelling</h3>
+                <p className="text-white/70 mb-4">Creative Design</p>
+              </div>
             </div>
           </div>
 
