@@ -1,0 +1,57 @@
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    @apply antialiased bg-black;
+  }
+
+  ::selection {
+    @apply bg-white/20 text-white;
+  }
+}
+
+@layer utilities {
+  .text-shadow {
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  }
+
+  .font-century-gothic {
+    font-family: "Century Gothic", "CenturyGothic", "AppleGothic", sans-serif;
+  }
+
+  .glass-card {
+    @apply backdrop-blur-md bg-white/5 border border-white/10;
+  }
+
+  .glass-effect {
+    @apply backdrop-blur-lg bg-black/30;
+  }
+
+  .neon-glow {
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.8),
+                 0 0 20px rgba(255, 255, 255, 0.8),
+                 0 0 30px rgba(255, 255, 255, 0.8);
+  }
+
+  .animated-border {
+    @apply relative overflow-hidden;
+    &::before {
+      content: '';
+      @apply absolute inset-0 border border-white/20;
+      animation: border-pulse 2s infinite;
+    }
+  }
+
+  @keyframes border-pulse {
+    0% { opacity: 0.2; }
+    50% { opacity: 0.8; }
+    100% { opacity: 0.2; }
+  }
+}
