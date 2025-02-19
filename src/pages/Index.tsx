@@ -211,7 +211,7 @@ function Index() {
       {/* Footer */}
       <footer className="py-12 px-4 border-t border-white/10">
         <div className="max-w-7xl mx-auto text-center">
-          <p className="text-sm opacity-50">© 2024 Astraeus | Media. All rights reserved.</p>
+          <p className="text-sm opacity-50">© 2025 Astraeus | Media. All rights reserved.</p>
         </div>
       </footer>
     </div>
