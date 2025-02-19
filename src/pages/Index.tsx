@@ -21,7 +21,7 @@ function Index() {
         <div className="relative z-10 text-center px-4 space-y-8">
           <div className="w-full flex justify-center">
             <img 
-              src="https://txawaxvwy4ijlqqh.public.blob.vercel-storage.com/Untitled-1-removebg-preview-46nPaSNW7KuDai5vSEmq05bsyBkIyi.png"
+              src="https://i.imghippo.com/files/bhnV6114hw.png"
               alt="Astraeus Media Logo"
               className="w-24 h-24 md:w-32 md:h-32 object-contain mb-8 animate-fade-in"
             />
