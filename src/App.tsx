@@ -45,7 +45,7 @@ function App() {
             />
             <ServiceCard 
               icon={<Code className="w-8 h-8" />}
-              title="Web Development"
+              title="Web Services"
               description="Custom digital experiences built with modern technologies."
             />
           </div>
