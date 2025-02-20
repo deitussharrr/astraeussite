@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import {Link} from 'react-router-dom';
 import { Camera, Code, Pen, Film, ChevronDown, Play, Instagram, Linkedin, Twitter } from 'lucide-react';
 
 function Index() {
@@ -68,11 +67,6 @@ function Index() {
       </section>
 
       {/* Services Section */}
-      interface ServiceCardProps {
-  icon: React.ReactNode;
-  title: string;
-  description: string;
-  onClick: () => void;
       <section className="py-32 px-4">
         <div className="max-w-7xl mx-auto">
           <h2 className="text-5xl font-bold text-center mb-24 tracking-tight font-century-gothic">Our Services</h2>
@@ -169,16 +163,14 @@ function Index() {
             </div>
           </div>
 
-
-      {/* Content Writing Work */}
-      <div className="glass-card rounded-2xl p-8 text-center flex items-center justify-center">
-  <Link 
-    to="/poetry" 
-    className="px-6 py-2 bg-white text-black rounded-full text-sm font-medium hover:bg-opacity-90 transition-colors"
-  >
-    Explore More
-  </Link>
-</div>
+          {/* Content Writing Work */}
+          <div id="content-work" className="mb-32">
+            <h3 className="text-3xl font-bold mb-12 tracking-tight font-century-gothic">Content Writing</h3>
+            <div className="glass-card rounded-2xl p-8 text-center">
+              <p className="text-gray-400">Coming Soon</p>
+            </div>
+          </div>
+        </div>
       </section>
 
       {/* Contact Section */}

@@ -1,34 +1,33 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
+import { useRouter } from 'next/router';
 
 const Poetry = () => {
   const [posts, setPosts] = useState([]);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const router = useRouter();
 
   const handleLogin = (e) => {
     e.preventDefault();
-    if (
-      (username === "KK" && password === "Kavin@2025") ||
-      (username === "Tusshar" && password === "Teexmoni248")
-    ) {
+    if ((username === 'KK' && password === 'Kavin@2025') || (username === 'Tusshar' && password === 'Teexmoni248')) {
       setIsAuthenticated(true);
     } else {
-      alert("Invalid credentials");
+      alert('Invalid credentials');
     }
   };
 
   const handleLogout = () => {
     setIsAuthenticated(false);
-    setUsername("");
-    setPassword("");
+    setUsername('');
+    setPassword('');
   };
 
   const handleAddPost = (e) => {
     e.preventDefault();
     const newPost = e.target.post.value;
     setPosts([...posts, newPost]);
-    e.target.post.value = "";
+    e.target.post.value = '';
   };
 
   return (
