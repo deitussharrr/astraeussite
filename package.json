@@ -61,8 +61,8 @@
     "@auth/core": "latest",
     "nodemailer": "latest",
     "next-auth": "latest",
-    "@tanstack/react-query": "latest",
-    "react-router-dom": "latest"
+    "react-router-dom": "latest",
+    "@tanstack/react-query": "latest"
   },
   "devDependencies": {
     "@types/node": "^22",
