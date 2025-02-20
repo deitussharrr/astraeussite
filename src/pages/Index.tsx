@@ -148,24 +148,20 @@ function Index() {
           </div>
 
           {/* Creative Design Work */}
-          // Add this under the Content Writing Work section
-<div id="content-work" className="mb-32">
-  <h3 className="text-3xl font-bold mb-12 tracking-tight font-century-gothic">Content Writing</h3>
-  <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-    <div className="glass-card rounded-2xl p-8 text-center">
-      <h3 className="text-2xl font-bold mb-4 font-century-gothic">Poetry</h3>
-      <p className="text-gray-400 leading-relaxed">Explore our collection of poetic expressions.</p>
-    </div>
-    <div className="glass-card rounded-2xl p-8 text-center flex items-center justify-center">
-      <a 
-        href="/poetry" 
-        className="px-6 py-2 bg-white text-black rounded-full text-sm font-medium hover:bg-opacity-90 transition-colors"
-      >
-        Explore More
-      </a>
-    </div>
-  </div>
-</div>
+          <div id="design-work" className="mb-32">
+            <h3 className="text-3xl font-bold mb-12 tracking-tight font-century-gothic">Creative Design</h3>
+            <div className="group relative aspect-video rounded-2xl overflow-hidden">
+              <img 
+                src="https://i.imghippo.com/files/YuH1118Ic.jpg"
+                alt="Creative Design Showcase"
+                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+              />
+              <div className="absolute inset-0 glass-effect opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col items-center justify-end p-8">
+                <h3 className="text-2xl font-bold mb-2">Visual Storytelling</h3>
+                <p className="text-white/70 mb-4">Creative Design</p>
+              </div>
+            </div>
+          </div>
 
           {/* Content Writing Work */}
           <div id="content-work" className="mb-32">
