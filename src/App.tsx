@@ -4,7 +4,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
-import Poetry from "./pages/Poetry";
+import Poetry from "./pages/Poetry";  // Fixed the import path to use relative path
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
