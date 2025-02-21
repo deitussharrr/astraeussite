@@ -21,7 +21,7 @@ function Index() {
         <div className="relative z-10 text-center px-4 space-y-8">
           <div className="w-full flex justify-center">
             <img 
-              src="https://i.imghippo.com/files/bhnV6114hw.png"
+              src="https://iili.io/39N2Eaj.png"
               alt="Astraeus Media Logo"
               className="w-24 h-24 md:w-32 md:h-32 object-contain mb-8 animate-fade-in"
             />
@@ -128,7 +128,7 @@ function Index() {
             <h3 className="text-3xl font-bold mb-12 tracking-tight font-century-gothic">Web Development</h3>
             <div className="group relative aspect-video rounded-2xl overflow-hidden">
               <img 
-                src="https://txawaxvwy4ijlqqh.public.blob.vercel-storage.com/bg-wI6Tzi4ACLEW2ccPe3d2e22mrQiS0e.jpg"
+                src="https://iili.io/39NqQyJ.md.jpg"
                 alt="Edmun 2.0"
                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
               />
@@ -152,7 +152,7 @@ function Index() {
             <h3 className="text-3xl font-bold mb-12 tracking-tight font-century-gothic">Creative Design</h3>
             <div className="group relative aspect-video rounded-2xl overflow-hidden">
               <img 
-                src="https://i.imghippo.com/files/YuH1118Ic.jpg"
+                src="https://iili.io/39NqtTv.jpg"
                 alt="Creative Design Showcase"
                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
               />
