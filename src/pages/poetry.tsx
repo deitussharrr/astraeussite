@@ -1,78 +1,135 @@
 import React, { useState } from 'react';
-import { useRouter } from 'next/router';
+import { useNavigate } from 'react-router-dom';
+
+interface BlogPost {
+  id: string;
+  title: string;
+  content: string;
+  author: string;
+  date: string;
+}
 
 const Poetry = () => {
-  const [posts, setPosts] = useState([]);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const router = useRouter();
+  const [posts, setPosts] = useState<BlogPost[]>([]);
+  const [newPost, setNewPost] = useState({ title: '', content: '' });
+  const navigate = useNavigate();
 
-  const handleLogin = (e) => {
+  const validCredentials = {
+    KK: 'Kavin@2025',
+    Tusshar: 'Teexmoni248'
+  };
+
+  const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
-    if ((username === 'KK' && password === 'Kavin@2025') || (username === 'Tusshar' && password === 'Teexmoni248')) {
+    if (validCredentials[username as keyof typeof validCredentials] === password) {
       setIsAuthenticated(true);
     } else {
       alert('Invalid credentials');
     }
   };
 
-  const handleLogout = () => {
-    setIsAuthenticated(false);
-    setUsername('');
-    setPassword('');
-  };
-
-  const handleAddPost = (e) => {
+  const handleSubmitPost = (e: React.FormEvent) => {
     e.preventDefault();
-    const newPost = e.target.post.value;
-    setPosts([...posts, newPost]);
-    e.target.post.value = '';
+    if (newPost.title && newPost.content) {
+      const post: BlogPost = {
+        id: Date.now().toString(),
+        title: newPost.title,
+        content: newPost.content,
+        author: username,
+        date: new Date().toLocaleDateString()
+      };
+      setPosts([post, ...posts]);
+      setNewPost({ title: '', content: '' });
+    }
   };
 
   return (
-    <div className="bg-black text-white min-h-screen p-8">
-      <h1 className="text-5xl font-bold mb-8 text-center">Poetry Blog</h1>
+    <div className="min-h-screen bg-black text-white p-8">
+      <button
+        onClick={() => navigate('/')}
+        className="mb-8 px-4 py-2 glass-card rounded-full hover:bg-white/10 transition-colors"
+      >
+        ← Back to Home
+      </button>
+
       {!isAuthenticated ? (
-        <form onSubmit={handleLogin} className="max-w-md mx-auto">
-          <input
-            type="text"
-            placeholder="Username"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-            className="w-full p-2 mb-4 bg-white/10 rounded"
-          />
-          <input
-            type="password"
-            placeholder="Password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            className="w-full p-2 mb-4 bg-white/10 rounded"
-          />
-          <button type="submit" className="w-full p-2 bg-white text-black rounded">
-            Login
-          </button>
-        </form>
-      ) : (
-        <div>
-          <button onClick={handleLogout} className="mb-4 p-2 bg-white text-black rounded">
-            Logout
-          </button>
-          <form onSubmit={handleAddPost} className="mb-8">
-            <textarea
-              name="post"
-              placeholder="Write your poetry here..."
-              className="w-full p-2 bg-white/10 rounded"
-              rows={4}
-            />
-            <button type="submit" className="mt-2 p-2 bg-white text-black rounded">
-              Add Post
+        <div className="max-w-md mx-auto glass-card p-8 rounded-2xl">
+          <h2 className="text-3xl font-bold mb-8 text-center font-century-gothic">Poetry Login</h2>
+          <form onSubmit={handleLogin} className="space-y-6">
+            <div>
+              <label className="block text-sm font-medium mb-2">Username</label>
+              <input
+                type="text"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+                className="w-full p-3 rounded-lg bg-white/5 border border-white/10 focus:border-white/30 transition-colors"
+                required
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium mb-2">Password</label>
+              <input
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                className="w-full p-3 rounded-lg bg-white/5 border border-white/10 focus:border-white/30 transition-colors"
+                required
+              />
+            </div>
+            <button
+              type="submit"
+              className="w-full py-3 glass-card rounded-lg hover:bg-white hover:text-black transition-all duration-300"
+            >
+              Login
             </button>
           </form>
-          <div>
-            {posts.map((post, index) => (
-              <div key={index} className="mb-4 p-4 bg-white/10 rounded">
-                <p>{post}</p>
+        </div>
+      ) : (
+        <div className="max-w-4xl mx-auto">
+          <h2 className="text-4xl font-bold mb-12 text-center font-century-gothic">Poetry Blog</h2>
+          
+          {/* New Post Form */}
+          <form onSubmit={handleSubmitPost} className="glass-card p-6 rounded-2xl mb-12">
+            <h3 className="text-2xl font-bold mb-6">Create New Post</h3>
+            <div className="space-y-4">
+              <div>
+                <label className="block text-sm font-medium mb-2">Title</label>
+                <input
+                  type="text"
+                  value={newPost.title}
+                  onChange={(e) => setNewPost({...newPost, title: e.target.value})}
+                  className="w-full p-3 rounded-lg bg-white/5 border border-white/10 focus:border-white/30 transition-colors"
+                  required
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-medium mb-2">Content</label>
+                <textarea
+                  value={newPost.content}
+                  onChange={(e) => setNewPost({...newPost, content: e.target.value})}
+                  className="w-full p-3 rounded-lg bg-white/5 border border-white/10 focus:border-white/30 transition-colors h-40"
+                  required
+                />
+              </div>
+              <button
+                type="submit"
+                className="w-full py-3 glass-card rounded-lg hover:bg-white hover:text-black transition-all duration-300"
+              >
+                Post Poetry
+              </button>
+            </div>
+          </form>
+
+          {/* Posts List */}
+          <div className="space-y-8">
+            {posts.map((post) => (
+              <div key={post.id} className="glass-card p-6 rounded-2xl">
+                <h3 className="text-2xl font-bold mb-2">{post.title}</h3>
+                <p className="text-gray-400 text-sm mb-4">By {post.author} • {post.date}</p>
+                <p className="whitespace-pre-wrap">{post.content}</p>
               </div>
             ))}
           </div>
