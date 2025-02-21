@@ -143,4 +143,5 @@ const Poetry = () => {
     </div>
   );
 };
-export default Poetry; // Make sure this line exists at the end of the file
+
+export default Poetry;

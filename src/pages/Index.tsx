@@ -163,8 +163,8 @@ function Index() {
             </div>
           </div>
 
-               {/* Content Writing Work */}
-               <div id="content-work" className="mb-32">
+          {/* Content Writing Work */}
+          <div id="content-work" className="mb-32">
             <h3 className="text-3xl font-bold mb-12 tracking-tight font-century-gothic">Content Writing</h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               <div className="glass-card rounded-2xl p-8">
@@ -184,6 +184,7 @@ function Index() {
           </div>
         </div>
       </section>
+
       {/* Contact Section */}
       <section className="py-32 px-4">
         <div className="max-w-4xl mx-auto text-center">
