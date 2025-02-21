@@ -171,7 +171,7 @@ function Index() {
                 <h4 className="text-2xl font-bold mb-4">Poetry</h4>
                 <p className="text-gray-400 mb-6">Experience the art of words through our curated collection of poetry.</p>
                 <a
-                  href="/poetry"
+                  href="https://astraeuspoetry.vercel.app/"
                   className="inline-block px-6 py-2 bg-white text-black rounded-full text-sm font-medium hover:bg-opacity-90 transition-colors"
                 >
                   Explore More
