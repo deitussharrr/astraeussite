@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Camera, Code, Pen, Film, ChevronDown, Play, Instagram, Linkedin, Twitter } from 'lucide-react';
 import { Helmet } from "react-helmet-async";
+import Hero3D from '@/components/Hero3D';
 
 function Index() {
   const [showSocials, setShowSocials] = useState(false);
@@ -28,28 +29,8 @@ function Index() {
           <meta name="twitter:image" content="https://iili.io/39N2Eaj.png" />
         </Helmet>
         <div className="bg-black text-white min-h-screen">
-          {/* Hero Section */}
-        <header className="relative h-screen flex items-center justify-center overflow-hidden" aria-label="Hero section">
-        <div className="absolute inset-0">
-          <div className="absolute inset-0 bg-gradient-to-b from-black via-black/95 to-black" />
-        </div>
-        <div className="relative z-10 text-center px-4 space-y-8">
-          <div className="w-full flex justify-center">
-            <img 
-              src="https://iili.io/39N2Eaj.png"
-              alt="Astraeus Media Logo"
-              className="w-24 h-24 md:w-32 md:h-32 object-contain mb-8 animate-fade-in"
-            />
-          </div>
-          <h1 className="text-5xl sm:text-7xl md:text-9xl font-bold mb-4 tracking-tight font-century-gothic neon-glow">
-            ASTRAEUS | MEDIA
-          </h1>
-          <p className="text-xl sm:text-2xl md:text-3xl font-light max-w-3xl mx-auto opacity-80 tracking-wide">
-            Crafting digital excellence through film, design, and innovation
-          </p>
-           <ChevronDown className="w-8 h-8 mx-auto mt-16 animate-bounce opacity-50" aria-label="Scroll down" />
-        </div>
-      </header>
+       {/* Hero Section with 3D */}
+       <Hero3D />
 
       {/* About Us Section */}
       <section className="relative py-32 px-4 overflow-hidden">
@@ -81,42 +62,8 @@ function Index() {
         </div>
       </section>
 
-      {/* Services Section */}
-      <section className="py-32 px-4">
-        <div className="max-w-7xl mx-auto">
-          <h2 className="text-5xl font-bold text-center mb-24 tracking-tight font-century-gothic">Our Services</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
-             <ServiceCard 
-               icon={<Film className="w-8 h-8" />}
-               title="Film Making"
-               description="Cinematic storytelling that captures your vision with precision and artistry."
-               onClick={() => scrollToSection('film-work')}
-               aria-label="Film Making service - Cinematic storytelling that captures your vision with precision and artistry"
-             />
-             <ServiceCard 
-               icon={<Camera className="w-8 h-8" />}
-               title="Creative Design"
-               description="Visual solutions that communicate your message with impact and elegance."
-               onClick={() => scrollToSection('design-work')}
-               aria-label="Creative Design service - Visual solutions that communicate your message with impact and elegance"
-             />
-             <ServiceCard 
-               icon={<Pen className="w-8 h-8" />}
-               title="Content Writing"
-               description="Compelling narratives that engage and inspire your audience."
-               onClick={() => scrollToSection('content-work')}
-               aria-label="Content Writing service - Compelling narratives that engage and inspire your audience"
-             />
-             <ServiceCard 
-               icon={<Code className="w-8 h-8" />}
-               title="Web Services"
-               description="Custom digital experiences built with modern technologies."
-               onClick={() => scrollToSection('web-work')}
-               aria-label="Web Services service - Custom digital experiences built with modern technologies"
-             />
-          </div>
-        </div>
-      </section>
+       {/* Services Section with 3D */}
+       <Services3D />
 
       {/* Portfolio Section */}
       <section className="py-32 px-4">
