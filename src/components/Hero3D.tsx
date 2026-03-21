@@ -1,137 +1,80 @@
-import * as THREE from 'three';
-import { Canvas, useFrame } from '@react-three/fiber';
 import { useEffect, useRef, useState } from 'react';
 
 const Hero3D = () => {
+  const heroRef = useRef<HTMLDivElement>(null);
+  const logoRef = useRef<HTMLImageElement>(null);
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
-  const logoGroupRef = useRef<THREE.Group>(null);
-  const spriteRef = useRef<THREE.Sprite>(null);
-  const pointsRef = useRef<THREE.Points>(null);
 
-  // Handle mouse move to rotate logo
+  // Handle mouse move to create 3D tilt effect
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
-      // Normalize mouse position to -1 to 1 range
-      const x = (e.clientX / window.innerWidth) * 2 - 1;
-      const y = -(e.clientY / window.innerHeight) * 2 + 1;
-      setMousePos({ x, y });
+      if (!heroRef.current) return;
+      
+      const rect = heroRef.current.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      
+      // Normalize to -0.5 to 0.5 range
+      const normX = (x / rect.width - 0.5) * 2;
+      const normY = (y / rect.height - 0.5) * 2;
+      
+      setMousePos({ x: normX, y: normY });
     };
 
     window.addEventListener('mousemove', handleMouseMove);
     return () => window.removeEventListener('mousemove', handleMouseMove);
   }, []);
 
-  // Update logo rotation based on mouse
-  useFrame((state) => {
-    if (logoGroupRef.current) {
-      // Smoothly rotate logo towards mouse position with damping
-      logoGroupRef.current.rotation.y = THREE.MathUtils.lerp(
-        logoGroupRef.current.rotation.y,
-        mousePos.x * 0.5,
-        0.1
-      );
-      logoGroupRef.current.rotation.x = THREE.MathUtils.lerp(
-        logoGroupRef.current.rotation.x,
-        mousePos.y * 0.3,
-        0.1
-      );
-    }
-
-    // Slowly rotate particles for background effect
-    if (pointsRef.current) {
-      pointsRef.current.rotation.y += 0.001;
-      pointsRef.current.rotation.x += 0.0005;
-    }
-  });
-
-  // Create particle geometry once
+  // Reset mouse position when leaving
   useEffect(() => {
-    if (pointsRef.current) {
-      const count = 1000;
-      const positions = new Float32Array(count * 3);
-      const colors = new Float32Array(count * 3);
-
-      for (let i = 0; i < count; i++) {
-        // Position
-        positions[i * 3] = (Math.random() - 0.5) * 20;
-        positions[i * 3 + 1] = (Math.random() - 0.5) * 20;
-        positions[i * 3 + 2] = (Math.random() - 0.5) * 20;
-
-        // Color (grayscale with some variation)
-        const intensity = Math.random() * 0.6 + 0.4; // 0.4 to 1.0
-        colors[i * 3] = intensity;
-        colors[i * 3 + 1] = intensity;
-        colors[i * 3 + 2] = intensity;
-      }
-
-      const geometry = new THREE.BufferGeometry();
-      geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-      geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
-
-      pointsRef.current.geometry = geometry;
-    }
+    const handleMouseLeave = () => {
+      setMousePos({ x: 0, y: 0 });
+    };
+    
+    window.addEventListener('mouseleave', handleMouseLeave);
+    return () => window.removeEventListener('mouseleave', handleMouseLeave);
   }, []);
 
   return (
-    <>
-      <canvas 
-        className="hero-canvas" 
-        style={{ 
-          position: 'fixed', 
-          top: 0, 
-          left: 0, 
-          width: '100%', 
-          height: '100%', 
-          pointerEvents: 'none' 
-        }}
-        camera={{ position: [0, 0, 5], fov: 45 }}
-      >
-        <ambientLight intensity={0.5} />
-        <directionalLight position={[5, 5, 5]} intensity={1} />
-        
-        {/* Logo Group - will respond to mouse */}
-        <group ref={logoGroupRef}>
-          {/* Logo Sprite - using the existing logo image */}
-          <sprite 
-            ref={spriteRef}
-            position={[0, 1, 0]}
-            scale={[3, 1.5, 1]}
-          >
-            <spriteMaterial 
-              map={new THREE.TextureLoader().load('https://iili.io/39N2Eaj.png')}
-              transparent
-              depthWrite={false}
-            />
-          </sprite>
-        </group>
-
-        {/* Background Particles */}
-        <points ref={pointsRef} position={[0, 0, 0]}>
-          <pointsMaterial 
-            size={0.1}
-            vertexColors
-            transparent
-            opacity={0.6}
-            depthWrite={false}
-          />
-        </points>
-      </canvas>
+    <div 
+      ref={heroRef}
+      className="relative h-screen flex items-center justify-center overflow-hidden bg-black"
+      style={{ perspective: '1000px' }}
+    >
+      {/* Background gradient */}
+      <div className="absolute inset-0">
+        <div className="absolute inset-0 bg-gradient-to-b from-black via-black/95 to-black" />
+      </div>
       
-      {/* HTML Content Overlay */}
-      <div className="relative z-10 flex min-h-screen flex-col items-center justify-center text-center px-4 pt-20">
-        <div className="space-y-6">
-          <h1 className="text-5xl sm:text-7xl md:text-9xl font-bold mb-4 tracking-tight font-century-gothic neon-glow text-white">
-            ASTRAEUS | MEDIA
-          </h1>
-          <p className="text-xl sm:text-2xl md:text-3xl font-light max-w-3xl mx-auto opacity-80 tracking-wide">
-            Crafting digital excellence through film, design, and innovation
-          </p>
-          <div className="w-8 h-8 mx-auto mt-16 animate-bounce opacity-50">
-            <span aria-label="Scroll down">⌄</span>
-          </div>
+      {/* 3D Logo Container */}
+      <div 
+        className="relative w-48 h-48 md:w-64 md:h-64"
+        style={{
+          transform: `rotateX(${mousePos.y * 15}deg) rotateY(${mousePos.x * 15}deg)`,
+          transition: 'transform 0.1s ease-out'
+        }}
+      >
+        <img 
+          ref={logoRef}
+          src="https://iili.io/39N2Eaj.png"
+          alt="Astraeus Media Logo"
+          className="w-full h-full object-contain"
+        />
+      </div>
+      
+      {/* Content Overlay */}
+      <div className="absolute bottom-16 text-center">
+        <h1 className="text-5xl sm:text-7xl md:text-9xl font-bold mb-4 tracking-tight font-century-gothic neon-glow text-white">
+          ASTRAEUS | MEDIA
+        </h1>
+        <p className="text-xl sm:text-2xl md:text-3xl font-light max-w-3xl mx-auto opacity-80 tracking-wide">
+          Crafting digital excellence through film, design, and innovation
+        </p>
+        <div className="w-8 h-8 mx-auto mt-16 animate-bounce opacity-50">
+          <span aria-label="Scroll down">⌄</span>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
