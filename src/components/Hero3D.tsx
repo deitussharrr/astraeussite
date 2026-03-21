@@ -1,5 +1,5 @@
 import * as THREE from 'three';
-import { Canvas, useFrame } from '@react-three/fiber';
+import { Canvas, useFrame, group, sprite, spriteMaterial, points, pointsMaterial } from '@react-three/fiber';
 import { useEffect, useRef, useState } from 'react';
 
 const Hero3D = () => {
