@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import { Camera, Code, Pen, Film, ChevronDown, Play, Instagram, Linkedin, Twitter } from 'lucide-react';
+import { Helmet } from "react-helmet-async";
 
 function Index() {
   const [showSocials, setShowSocials] = useState(false);
+  const [isToggling, setIsToggling] = useState(false);
 
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
@@ -11,10 +13,23 @@ function Index() {
     }
   };
 
-  return (
-    <div className="bg-black text-white min-h-screen">
-      {/* Hero Section */}
-      <header className="relative h-screen flex items-center justify-center overflow-hidden">
+    return (
+      <>
+        <Helmet>
+          <title>Astraeus | Media - Creative Digital Agency</title>
+          <meta name="description" content="Astraeus | Media is a creative digital agency specializing in film making, creative design, content writing, and web services. We craft digital excellence through innovation and expertise." />
+          <meta property="og:title" content="Astraeus | Media - Creative Digital Agency" />
+          <meta property="og:description" content="Astraeus | Media is a creative digital agency specializing in film making, creative design, content writing, and web services. We craft digital excellence through innovation and expertise." />
+          <meta property="og:image" content="https://iili.io/39N2Eaj.png" />
+          <meta property="og:type" content="website" />
+          <meta name="twitter:card" content="summary_large_image" />
+          <meta name="twitter:title" content="Astraeus | Media - Creative Digital Agency" />
+          <meta name="twitter:description" content="Astraeus | Media is a creative digital agency specializing in film making, creative design, content writing, and web services." />
+          <meta name="twitter:image" content="https://iili.io/39N2Eaj.png" />
+        </Helmet>
+        <div className="bg-black text-white min-h-screen">
+          {/* Hero Section */}
+        <header className="relative h-screen flex items-center justify-center overflow-hidden" aria-label="Hero section">
         <div className="absolute inset-0">
           <div className="absolute inset-0 bg-gradient-to-b from-black via-black/95 to-black" />
         </div>
@@ -32,7 +47,7 @@ function Index() {
           <p className="text-xl sm:text-2xl md:text-3xl font-light max-w-3xl mx-auto opacity-80 tracking-wide">
             Crafting digital excellence through film, design, and innovation
           </p>
-          <ChevronDown className="w-8 h-8 mx-auto mt-16 animate-bounce opacity-50" />
+           <ChevronDown className="w-8 h-8 mx-auto mt-16 animate-bounce opacity-50" aria-label="Scroll down" />
         </div>
       </header>
 
@@ -71,30 +86,34 @@ function Index() {
         <div className="max-w-7xl mx-auto">
           <h2 className="text-5xl font-bold text-center mb-24 tracking-tight font-century-gothic">Our Services</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
-            <ServiceCard 
-              icon={<Film className="w-8 h-8" />}
-              title="Film Making"
-              description="Cinematic storytelling that captures your vision with precision and artistry."
-              onClick={() => scrollToSection('film-work')}
-            />
-            <ServiceCard 
-              icon={<Camera className="w-8 h-8" />}
-              title="Creative Design"
-              description="Visual solutions that communicate your message with impact and elegance."
-              onClick={() => scrollToSection('design-work')}
-            />
-            <ServiceCard 
-              icon={<Pen className="w-8 h-8" />}
-              title="Content Writing"
-              description="Compelling narratives that engage and inspire your audience."
-              onClick={() => scrollToSection('content-work')}
-            />
-            <ServiceCard 
-              icon={<Code className="w-8 h-8" />}
-              title="Web Services"
-              description="Custom digital experiences built with modern technologies."
-              onClick={() => scrollToSection('web-work')}
-            />
+             <ServiceCard 
+               icon={<Film className="w-8 h-8" />}
+               title="Film Making"
+               description="Cinematic storytelling that captures your vision with precision and artistry."
+               onClick={() => scrollToSection('film-work')}
+               aria-label="Film Making service - Cinematic storytelling that captures your vision with precision and artistry"
+             />
+             <ServiceCard 
+               icon={<Camera className="w-8 h-8" />}
+               title="Creative Design"
+               description="Visual solutions that communicate your message with impact and elegance."
+               onClick={() => scrollToSection('design-work')}
+               aria-label="Creative Design service - Visual solutions that communicate your message with impact and elegance"
+             />
+             <ServiceCard 
+               icon={<Pen className="w-8 h-8" />}
+               title="Content Writing"
+               description="Compelling narratives that engage and inspire your audience."
+               onClick={() => scrollToSection('content-work')}
+               aria-label="Content Writing service - Compelling narratives that engage and inspire your audience"
+             />
+             <ServiceCard 
+               icon={<Code className="w-8 h-8" />}
+               title="Web Services"
+               description="Custom digital experiences built with modern technologies."
+               onClick={() => scrollToSection('web-work')}
+               aria-label="Web Services service - Custom digital experiences built with modern technologies"
+             />
           </div>
         </div>
       </section>
@@ -104,34 +123,36 @@ function Index() {
         <div className="max-w-7xl mx-auto">
           <h2 className="text-5xl font-bold text-center mb-24 tracking-tight font-century-gothic">Featured Work</h2>
           
-          {/* Film Making Work */}
-          <div id="film-work" className="mb-32">
-            <h3 className="text-3xl font-bold mb-12 tracking-tight font-century-gothic">Film Making</h3>
-            <div className="group relative aspect-video rounded-2xl overflow-hidden bg-gray-900">
-              <iframe 
-                className="w-full h-full"
-                src="https://www.youtube.com/embed/cVYADU53pRw"
-                title="A Letter to my Childhood"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-              />
-              <div className="absolute inset-0 glass-effect opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col items-center justify-center">
-                <Play className="w-16 h-16 mb-4" />
-                <h3 className="text-2xl font-bold mb-2">A Letter to my Childhood</h3>
-                <p className="text-white/70">Short Film</p>
-              </div>
-            </div>
-          </div>
+           {/* Film Making Work */}
+           <div id="film-work" className="mb-32">
+             <h3 className="text-3xl font-bold mb-12 tracking-tight font-century-gothic">Film Making</h3>
+             <div className="group relative aspect-video rounded-2xl overflow-hidden bg-gray-900">
+               <iframe 
+                 className="w-full h-full"
+                 src="https://www.youtube.com/embed/cVYADU53pRw"
+                 title="A Letter to my Childhood"
+                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                 allowFullScreen
+                 loading="lazy"
+               />
+               <div className="absolute inset-0 glass-effect opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col items-center justify-center">
+                 <Play className="w-16 h-16 mb-4" />
+                 <h3 className="text-2xl font-bold mb-2">A Letter to my Childhood</h3>
+                 <p className="text-white/70">Short Film</p>
+               </div>
+             </div>
+           </div>
 
           {/* Web Development Work */}
           <div id="web-work" className="mb-32">
             <h3 className="text-3xl font-bold mb-12 tracking-tight font-century-gothic">Web Development</h3>
             <div className="group relative aspect-video rounded-2xl overflow-hidden">
-              <img 
-                src="https://iili.io/39NqQyJ.md.jpg"
-                alt="Edmun 2.0"
-                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-              />
+             <img 
+               src="https://iili.io/39NqQyJ.md.jpg"
+               alt="Edmun 2.0"
+               className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+               loading="lazy"
+             />
               <div className="absolute inset-0 glass-effect opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col items-center justify-end p-8">
                 <h3 className="text-2xl font-bold mb-2">Edmun 2.0</h3>
                 <p className="text-white/70 mb-4">Web Development</p>
@@ -191,12 +212,20 @@ function Index() {
           <h2 className="text-5xl font-bold mb-8 tracking-tight font-century-gothic">Let's Create Together</h2>
           <p className="text-xl font-light mb-16 opacity-80">Transform your vision into reality with Astraeus | Media</p>
           <div className="relative inline-block">
-            <button 
-              className="glass-card px-12 py-5 text-lg font-medium rounded-full hover:bg-white hover:text-black transition-all duration-300"
-              onClick={() => setShowSocials(!showSocials)}
-            >
-              Get in Touch
-            </button>
+              <button 
+                className="glass-card px-12 py-5 text-lg font-medium rounded-full hover:bg-white hover:text-black transition-all duration-300"
+                onClick={() => {
+                  setIsToggling(true);
+                  setTimeout(() => {
+                    setShowSocials(!showSocials);
+                    setIsToggling(false);
+                  }, 300);
+                }}
+                disabled={isToggling}
+                aria-label="Toggle social media links"
+              >
+                {isToggling ? 'Updating...' : 'Get in Touch'}
+              </button>
             {showSocials && (
               <div className="absolute left-1/2 -translate-x-1/2 mt-4 p-2 glass-card rounded-2xl flex gap-4 animate-in fade-in slide-in-from-top-4 duration-200">
                 <a 
@@ -234,16 +263,18 @@ function Index() {
         <div className="max-w-7xl mx-auto text-center">
           <p className="text-sm opacity-50">© 2025 Astraeus | Media. All rights reserved.</p>
         </div>
-      </footer>
-    </div>
-  );
-}
+       </footer>
+     </div>
+      </>
+   );
+ }
 
-function ServiceCard({ icon, title, description, onClick }) {
+function ServiceCard({ icon, title, description, onClick, ariaLabel }) {
   return (
     <div 
       className="glass-card p-8 rounded-2xl text-center group cursor-pointer transition-all duration-300 hover:scale-105"
       onClick={onClick}
+      aria-label={ariaLabel}
     >
       <div className="w-20 h-20 mx-auto mb-6 flex items-center justify-center border border-white/10 rounded-2xl group-hover:border-white/30 transition-colors duration-300">
         {icon}

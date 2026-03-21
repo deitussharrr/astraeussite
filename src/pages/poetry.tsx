@@ -15,80 +15,101 @@ const Poetry = () => {
   const [password, setPassword] = useState('');
   const [posts, setPosts] = useState<BlogPost[]>([]);
   const [newPost, setNewPost] = useState({ title: '', content: '' });
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const navigate = useNavigate();
 
-  const validCredentials = {
-    KK: 'Kavin@2025',
-    Tusshar: 'Teexmoni248'
-  };
+// For demo purposes only - in production, use proper authentication like JWT, OAuth, or secure backend
+// In a real application, credentials should be stored in environment variables or a secure database
+const validCredentials = {
+  KK: 'Kavin@2025',
+  Tusshar: 'Teexmoni248'
+};
 
-  const handleLogin = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (validCredentials[username as keyof typeof validCredentials] === password) {
-      setIsAuthenticated(true);
-    } else {
-      alert('Invalid credentials');
-    }
-  };
+   const [isLoggingIn, setIsLoggingIn] = useState(false);
+   
+   const handleLogin = (e: React.FormEvent) => {
+     e.preventDefault();
+     setIsLoggingIn(true);
+     // Simulate network delay for demo purposes
+     setTimeout(() => {
+       if (validCredentials[username as keyof typeof validCredentials] === password) {
+         setIsAuthenticated(true);
+       } else {
+         alert('Invalid credentials');
+       }
+       setIsLoggingIn(false);
+     }, 1000);
+   };
 
-  const handleSubmitPost = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (newPost.title && newPost.content) {
-      const post: BlogPost = {
-        id: Date.now().toString(),
-        title: newPost.title,
-        content: newPost.content,
-        author: username,
-        date: new Date().toLocaleDateString()
-      };
-      setPosts([post, ...posts]);
-      setNewPost({ title: '', content: '' });
-    }
-  };
+   const handleSubmitPost = (e: React.FormEvent) => {
+     e.preventDefault();
+     if (newPost.title && newPost.content) {
+       setIsSubmitting(true);
+       // Simulate network delay for demo purposes
+       setTimeout(() => {
+         const post: BlogPost = {
+           id: Date.now().toString(),
+           title: newPost.title,
+           content: newPost.content,
+           author: username,
+           date: new Date().toLocaleDateString()
+         };
+         setPosts([post, ...posts]);
+         setNewPost({ title: '', content: '' });
+         setIsSubmitting(false);
+       }, 1500);
+     }
+   };
 
   return (
     <div className="min-h-screen bg-black text-white p-8">
-      {/* Navigation */}
-      <nav className="max-w-7xl mx-auto mb-8">
-        <button
-          onClick={() => navigate('/')}
-          className="glass-card px-6 py-2 rounded-full hover:bg-white/10 transition-colors flex items-center gap-2"
-        >
-          <span>←</span> Back to Home
-        </button>
-      </nav>
+       {/* Navigation */}
+       <nav className="max-w-7xl mx-auto mb-8" aria-label="Main navigation">
+         <button
+           onClick={() => navigate('/')}
+           className="glass-card px-6 py-2 rounded-full hover:bg-white/10 transition-colors flex items-center gap-2"
+           aria-label="Back to home page"
+         >
+           <span aria-hidden="true">←</span> Back to Home
+         </button>
+       </nav>
 
       <div className="max-w-4xl mx-auto">
         {!isAuthenticated ? (
           <div className="glass-card p-8 rounded-2xl">
             <h2 className="text-3xl font-bold mb-8 text-center font-century-gothic">Poetry Login</h2>
             <form onSubmit={handleLogin} className="space-y-6">
-              <div>
-                <label className="block text-sm font-medium mb-2">Username</label>
-                <input
-                  type="text"
-                  value={username}
-                  onChange={(e) => setUsername(e.target.value)}
-                  className="w-full p-3 rounded-lg bg-white/5 border border-white/10 focus:border-white/30 transition-colors"
-                  required
-                />
-              </div>
-              <div>
-                <label className="block text-sm font-medium mb-2">Password</label>
-                <input
-                  type="password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  className="w-full p-3 rounded-lg bg-white/5 border border-white/10 focus:border-white/30 transition-colors"
-                  required
-                />
-              </div>
-              <button
-                type="submit"
-                className="w-full py-3 glass-card rounded-lg hover:bg-white hover:text-black transition-all duration-300"
-              >
-                Login
-              </button>
+       <div>
+         <label htmlFor="username-input" className="block text-sm font-medium mb-2">Username</label>
+         <input
+           id="username-input"
+           type="text"
+           value={username}
+           onChange={(e) => setUsername(e.target.value)}
+           className="w-full p-3 rounded-lg bg-white/5 border border-white/10 focus:border-white/30 transition-colors"
+           required
+           aria-label="Username for poetry login"
+         />
+       </div>
+               <div>
+                 <label htmlFor="password-input" className="block text-sm font-medium mb-2">Password</label>
+                 <input
+                   id="password-input"
+                   type="password"
+                   value={password}
+                   onChange={(e) => setPassword(e.target.value)}
+                   className="w-full p-3 rounded-lg bg-white/5 border border-white/10 focus:border-white/30 transition-colors"
+                   required
+                   aria-label="Password for poetry login"
+                 />
+               </div>
+               <button
+                 type="submit"
+                 className="w-full py-3 glass-card rounded-lg hover:bg-white hover:text-black transition-all duration-300"
+                 disabled={isLoggingIn}
+               >
+                 {isLoggingIn ? 'Logging in...' : 'Login'}
+               </button>
             </form>
           </div>
         ) : (
@@ -118,12 +139,13 @@ const Poetry = () => {
                     required
                   />
                 </div>
-                <button
-                  type="submit"
-                  className="w-full py-3 glass-card rounded-lg hover:bg-white hover:text-black transition-all duration-300"
-                >
-                  Post Poetry
-                </button>
+                 <button
+                   type="submit"
+                   className="w-full py-3 glass-card rounded-lg hover:bg-white hover:text-black transition-all duration-300"
+                   disabled={isSubmitting}
+                 >
+                   {isSubmitting ? 'Posting...' : 'Post Poetry'}
+                 </button>
               </div>
             </form>
 
