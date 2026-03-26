@@ -4,6 +4,7 @@ const Hero3D = () => {
   const heroRef = useRef<HTMLDivElement>(null);
   const logoRef = useRef<HTMLImageElement>(null);
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+  const [isHovered, setIsHovered] = useState(false);
 
   // Handle mouse move to create 3D tilt effect
   useEffect(() => {
@@ -19,20 +20,21 @@ const Hero3D = () => {
       const normY = (y / rect.height - 0.5) * 2;
       
       setMousePos({ x: normX, y: normY });
+      setIsHovered(true);
     };
 
-    window.addEventListener('mousemove', handleMouseMove);
-    return () => window.removeEventListener('mousemove', handleMouseMove);
-  }, []);
-
-  // Reset mouse position when leaving
-  useEffect(() => {
     const handleMouseLeave = () => {
+      setIsHovered(false);
       setMousePos({ x: 0, y: 0 });
     };
+
+    heroRef.current?.addEventListener('mousemove', handleMouseMove);
+    heroRef.current?.addEventListener('mouseleave', handleMouseLeave);
     
-    window.addEventListener('mouseleave', handleMouseLeave);
-    return () => window.removeEventListener('mouseleave', handleMouseLeave);
+    return () => {
+      heroRef.current?.removeEventListener('mousemove', handleMouseMove);
+      heroRef.current?.removeEventListener('mouseleave', handleMouseLeave);
+    };
   }, []);
 
   return (
@@ -50,7 +52,7 @@ const Hero3D = () => {
       <div 
         className="relative w-48 h-48 md:w-64 md:h-64"
         style={{
-          transform: `rotateX(${mousePos.y * 15}deg) rotateY(${mousePos.x * 15}deg)`,
+          transform: `rotateX(${isHovered ? mousePos.y * 15 : 0}deg) rotateY(${isHovered ? mousePos.x * 15 : 0}deg)`,
           transition: 'transform 0.1s ease-out'
         }}
       >
@@ -59,6 +61,10 @@ const Hero3D = () => {
           src="https://iili.io/39N2Eaj.png"
           alt="Astraeus Media Logo"
           className="w-full h-full object-contain"
+          style={{
+            filter: isHovered ? 'drop-shadow(0 0 10px rgba(76, 201, 240, 0.5))' : 'none',
+            transition: 'filter 0.3s ease'
+          }}
         />
       </div>
       

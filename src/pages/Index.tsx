@@ -30,7 +30,7 @@ function Index() {
         </Helmet>
         <div className="bg-black text-white min-h-screen">
        {/* Hero Section with 3D */}
-       <Hero3D />
+        <Hero3D />
 
       {/* About Us Section */}
       <section className="relative py-32 px-4 overflow-hidden">
